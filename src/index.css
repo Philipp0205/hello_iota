@@ -3,3 +3,29 @@ body {
   padding: 0;
   font-family: sans-serif;
 }
+
+.content {
+  text-align: left;
+}
+
+.user-input-form {
+  display: inline-block;
+  width: 30%;
+  padding-left: 10px
+}
+
+label {
+  padding-bottom: 10px;
+}
+
+input {
+  width: 100%;
+}
+
+.header-description {
+  margin: 10px;
+}
+
+#submt_btn {
+  margin-top: 10px;
+}

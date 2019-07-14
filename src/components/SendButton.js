@@ -4,7 +4,18 @@ class SendButton extends Component {
 
   constructor(props){
        super(props);
-       console.log("iota from SendButton Component", this.props.iota);
+
+       this.state = {
+          address: '',
+          value: '',
+          message: '',
+          tag: '',
+        };
+
+        this.handleChange = this.handleChange.bind(this);
+        this.handleSubmit = this.handleSubmit.bind(this);
+
+         console.log("iota from SendButton Component", this.props.iota);
    }
 
   send() {
@@ -17,12 +28,16 @@ class SendButton extends Component {
         // This is my test address
         // you can find all transactions here:
         // https://devnet.thetangle.org/address/XZRCWIPKMX9BBTEVIFEEHOQWBAYCQLRQOYTIIIR9LDYVTPBRLXOFSWZAOYMQDJDNPRNNRWIXLTWZKMK9Y
-        address: 'XZRCWIPKMX9BBTEVIFEEHOQWBAYCQLRQOYTIIIR9LDYVTPBRLXOFSWZAOYMQDJDNPRNNRWIXLTWZKMK9YJDEZJYOGZ',
+        //Address: XZRCWIPKMX9BBTEVIFEEHOQWBAYCQLRQOYTIIIR9LDYVTPBRLXOFSWZAOYMQDJDNPRNNRWIXLTWZKMK9YJDEZJYOGZ
+        address: this.state.address.value,
+
         // Value sent to recipient
         value: 0,
         message: 'HELLO9WORLD9FROM9REACT9AND9IOTA',
         tag: 'HELLOWORLD'
     }
+
+    console.log("Adress: " + this.state.address.value)
 
     const transfers = [transaction]
 
@@ -55,9 +70,51 @@ class SendButton extends Component {
 
   };
 
+  handleChange (evt) {
+    // check it out: we get the evt.target.name (which will be either "email" or "password")
+    // and use it to target the key on our `state` object with the same name, using bracket syntax
+
+    this.setState({ [evt.target.name]: evt.target.value });
+    //this.setState({value: evt.target.value});
+
+  }
+
+  handleSubmit (evt) {
+    alert(' Adress: ' + this.state.address + ' Value: ' + this.state.value +
+    ' Message: ' + this.state.message + ' Tag: ' + this.state.tag);
+    evt.preventDefault();
+  }
+
+
   render() {
     return (
-      <button onClick={this.send.bind(this)}>Send Transaction</button>
+      <div className="content">
+        <div className="header-description">Blockchain Fundamentals: Wallet</div>
+        <div className="user-input-form">
+          <form onSubmit={this.handleSubmit}>
+            <label>
+              Adress:
+              <input name= "address" type="text" onChange={this.handleChange} />
+            </label>
+            <label>
+              Value:
+              <input name= "value" type="text" onChange={this.handleChange} />
+            </label>
+            <label>
+               Message:
+              <input name= "message" type="text" onChange={this.handleChange} />
+            </label>
+            <label>
+              Tag:
+              <input name= "tag" type="text" onChange={this.handleChange} />
+            </label>
+
+            <input id="submt_btn" type="submit" value="Submit" onChange={this.handleSubmit} />
+          </form>
+        </div>
+
+          <button onClick={this.send.bind(this)}>Send Transaction</button>
+        </div>
     );
   }
 }

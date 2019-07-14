@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import logo from './logo.svg';
 import './App.css';
 import SendButton from './components/SendButton'
+//import AsciiToTrytes from './components/asciiTotrytes'
 import IOTA from 'iota.lib.js'
 import CURL from 'curl.lib.js'
 
@@ -14,7 +15,7 @@ class App extends Component {
     var iota = new IOTA({
         'provider': 'https://nodes.devnet.thetangle.org:443'
     });
-    
+
     // Attach curl to iota instance so that we can perform WebGL proof of work
     try {
         CURL.init();
@@ -43,6 +44,7 @@ class App extends Component {
           <h1 className="App-title">Welcome to React</h1>
         </header>
         <SendButton iota={this.state.iota}/>
+
       </div>
     );
   }
